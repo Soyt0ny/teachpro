@@ -116,7 +116,8 @@ else
   echo "SKIP claude/agents: $HOME/.claude not present or not wanted"
 fi
 
-# 4. OpenCode subagent (teachpro-researcher entry in opencode.json).
+# 4. OpenCode agent (teachpro-researcher entry in opencode.json).
+# Mode "all" so it appears in Tab//agents AND stays delegable as subagent.
 # Idempotent: creates the key only if missing, updates it only if it carries
 # our marker; never touches user-owned keys.
 if wanted opencode && [[ -f "$HOME/.config/opencode/opencode.json" ]]; then
@@ -140,7 +141,7 @@ else:
     agents["teachpro-researcher"] = {
         "__managed_by": "teachpro/install",
         "description": "TeachPro web researcher — verifies facts via web search before teaching.",
-        "mode": "subagent",
+        "mode": "all",
         "prompt": prompt,
     }
     with open(cfg_path, "w") as f:
