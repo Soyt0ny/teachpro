@@ -32,20 +32,10 @@ Install only some agents:
   `agents/*.md` (researcher, mermaid-maker, svg-maker),
   `extensions/` (quiz, md-log, ask-user-question, visual-tools),
   `config/teachpro.json` (never overwrites an existing config)
-- Subagents where each platform allows it:
-  - Claude: `agents/claude/researcher.md` → `~/.claude/agents/researcher.md`
-  - OpenCode: `teachpro-researcher` entry merged into `opencode.json`
-    (idempotent; never touches user-owned keys)
-  - Codex / Copilot / Gemini: skills-only (no file-based subagent
-    mechanism found, so nothing to register)
 
-## Why only researcher travels
-
-`mermaid-maker` and `svg-maker` depend on pi-only tools
-(`write_mermaid`, `render_mermaid`, `write_svg`, … from the bundled
-`visual-tools` extension). They cannot run on other platforms without
-reimplementing those tools, so they stay pi-only by design. `researcher`
-only needs web search + fetch, which every platform has.
+Skills-only by design: every platform gets the three skills; pi
+additionally gets its agents, extensions and config. No `opencode.json`
+entries or `~/.claude/agents` files are touched.
 
 ## Strategy: copy, like gentle-ai
 
